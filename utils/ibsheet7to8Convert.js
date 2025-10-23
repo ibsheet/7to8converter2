@@ -23,6 +23,12 @@ export function findSheetId(legacyCode){
             var end_pos = legacyCode.indexOf(")",start_pos);
              rtnObj.sheetID = legacyCode.substring(start_pos,end_pos).trim();
         }
+        // 남동발전 전용 마이그레이션 코드
+        if(legacyCode.indexOf("setDefaultSheetConfig")>-1) {
+            var start_pos = legacyCode.indexOf( "(" , legacyCode.indexOf("setDefaultSheetConfig")+21)+1;;
+            var end_pos = legacyCode.indexOf(",",start_pos);
+            rtnObj.sheetID = legacyCode.substring(start_pos,end_pos).trim(); // sheet 초기화 객체
+        }
     }
     // // 임의의 시트 객체
     // if(typeof rtnObj.initObj == "string" && rtnObj.initObj != ""){
@@ -51,6 +57,28 @@ export function findSheetId(legacyCode){
 
     return rtnObj;
 }
+
+
+// 남동 발전 전용 마이그레이션 코드
+function setDefaultSheetConfig(sheetID, cfg, headers, cols, combo ){
+    createIBSheetObject({sheetID:sheetID});
+    window[sheetID]["SetConfig"](cfg);
+    window[sheetID]["InitHeaders"](headers, {Sort:1, ColMove:1, ColResize:1});
+    window[sheetID]["InitColumns"](cols);
+
+    if(combo){
+        for(var c=0;c<combo.length;c++){
+            for( var i = 0 ; i < convertSheet.Cols.length ; i++ ) {
+                if( convertSheet.Cols[i].Name == combo[c]?.ComboItem[1] ) {
+                    convertSheet.Cols[i].EnumKeys = "|"+combo[c]?.ComboItem[2];
+                    convertSheet.Cols[i].Enum = "|"+combo[c]?.ComboItem[3];
+                }
+            }
+        }       
+    }
+
+}
+
 
 //시트 이름으로 객체를 만들고 함수도 몇개 넣어주자.
 function createIBSheetObject(rtnObj){
