@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
-import { Code2, Maximize2, Copy} from 'lucide-react';
+import { Code2, Maximize2, Copy, Github} from 'lucide-react';
 import Editor from '@monaco-editor/react';
 import {findSheetId, convert7to8} from '../utils/ibsheet7to8Convert';
 import convertEvent from '../utils/convertEvent';
@@ -630,6 +630,27 @@ IBS_InitSheet(mySheet, initData);`);
 
   return (
     <div className="w-full h-screen flex flex-col bg-slate-50">
+      {/* Header */}
+      <div className="bg-white border-b border-slate-200 px-6 py-1">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <Code2 className="w-6 h-6 text-blue-600" />
+            <h1 className="text-xl font-bold text-slate-800">IBSheet Code Converter</h1>
+            <span className="text-sm text-slate-500 font-medium">v7 → v8</span>
+          </div>
+          <a
+            href="https://github.com/ibsheet/7to8converter2"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition-colors duration-200 shadow-sm hover:shadow-md"
+          >
+            <Github className="w-5 h-5" />
+            <span className="font-medium">GitHub</span>
+          </a>
+        </div>
+      </div>
+
+      {/* Tabs */}
       <div className="flex gap-1 px-6 pt-4 bg-white border-b border-slate-200">
         <button
           onClick={() => setActiveTab('page1')}
