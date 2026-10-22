@@ -1,4 +1,5 @@
-import Swal from 'sweetalert2';
+(function () {
+'use strict';
 
 
 var convertSheet = {};
@@ -9,7 +10,7 @@ var notice = "";
 var $ = (param) => {return {}};
 
 //ibsheet 객체명과 초기화 객체 명 찾기
-export function findSheetId(legacyCode){
+function findSheetId(legacyCode){
   const rtnObj = {};
     if(legacyCode.indexOf("IBS_InitSheet")>-1) {
         var start_pos = legacyCode.indexOf( "(" , legacyCode.indexOf("IBS_InitSheet")+13)+1;
@@ -328,7 +329,7 @@ function myEval(str) {
 }
 
 //최종 변환!!
-export function convert7to8(legacyCode, sheetid, initObj, elObj){
+function convert7to8(legacyCode, sheetid, initObj, elObj){
     
     // jsp <% %> 대응
     legacyCode = legacyCode.replace(/<%\s(.*?)%>/gs, (match, p1) => {
@@ -1055,3 +1056,7 @@ function IBS_InitSheet(sheetId, createOption){
         }
     }
 }
+
+window.findSheetId = findSheetId;
+window.convert7to8 = convert7to8;
+})();

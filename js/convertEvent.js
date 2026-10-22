@@ -1,3 +1,5 @@
+(function () {
+'use strict';
 const EVENTS = ["OnAfterColumnMove","OnAfterEdit","OnAfterPaste","OnAfterExpand","OnBeforeCheck","OnBeforeCheckAll","OnBeforeColumnMove","OnBeforeDownload","OnBeforeEdit","OnBeforeExpand","OnBeforeMovePage","OnBeforePaste","OnBeforeSave","OnBeforeSearch","OnBeforeSort","OnBeforeTab","OnButtonClick","OnCellDropEnd","OnChange","OnChangeFilter","OnChangeSum","OnCheckAllEnd","OnClick","OnColumnSort","OnDblClick","OnDebugMsg","OnDecryption","OnDownFinish","OnDragStart","OnDropEnd","OnEditValidation","OnEncryption","OnExportEncryption","OnFilterEnd","OnGroupFinish","OnGroupStart","OnHScroll","OnKeyDown","OnKeyUp","OnLoad","OnLoadData","OnLoadExcel","OnLoadFileSelect","OnLoadText","OnMessage","OnMouseDown","OnMouseMove","OnMouseUp","OnMovePage","OnPageRequest","OnPopupClick","OnResize","OnRowDelete","OnRowSearchEnd","OnSaveEnd","OnSearchEnd","OnSelectMenu","OnSelectCell","OnSelectEnd","OnSmartResize","OnSort","OnTab","OnTreeCheckChange","OnTreeChild","OnUserResize","OnValidation","OnVScroll","OnWaitTimeOut"];
 
 // 함수의 매개변수 문자열을 배열로 반환
@@ -336,4 +338,7 @@ const convertEvent = function(str) {
 };
 
 
-export default convertEvent;
+
+
+window.convertEvent = convertEvent;
+})();
